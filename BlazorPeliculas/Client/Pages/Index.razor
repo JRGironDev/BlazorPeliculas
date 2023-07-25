@@ -1,14 +1,53 @@
 ﻿@page "/"
-@using BlazorPeliculas.Client.Utilidades;
 
-<p>Hola, @UtilidadesString.Transformar(nombre)</p>
+<div>
+    <h3>Película</h3>
 
-<p>Vamos a sumar 2 + 2 = @(2 + 2)</p>
+    <h4>Ejemplo foreach</h4>
+    @foreach (var pelicula in ObtenerPeliculas())
+    {
+        <div>
+            <p>Título: <b>@pelicula.Titulo</b></p>
+            <p>Fecha Lanzamiento: <b>@pelicula.FechaLanzamiento.ToString("dd MMM yyyy")</b></p>
+        </div>
+    }
+    <br />
+    <h4>Ejemplo for</h4>
 
-<button @onclick=@ManejarClickBoton>Presióname</button>
+    @for (int i = 0; i < Peliculas.Count; i++)
+    {
+        <div>
+            <p>@(i+1) Título: <b>@Peliculas[i].Titulo</b></p>
+            <p>Fecha Lanzamiento: <b>@Peliculas[i].FechaLanzamiento.ToString("dd MMM yyyy")</b></p>
+        </div>
+    }
+
+</div>
 
 @code {
-    string nombre = "Luis";
+    string nombre = "Daniela";
+
+    Pelicula WakandaForever { get { return ObtenerPelicula(); } }
+    List<Pelicula> Peliculas { get { return ObtenerPeliculas(); } }
+
+    Pelicula ObtenerPelicula()
+    {
+        return new Pelicula
+        {
+            Titulo = "Wakanda Forever",
+            FechaLanzamiento = new DateTime(2022, 11, 11)
+        };
+    }
+
+    List<Pelicula> ObtenerPeliculas()
+    {
+        return new List<Pelicula>()
+            {
+                new Pelicula{Titulo = "Wakanda Forever", FechaLanzamiento = new DateTime(2022,11,11) },
+                new Pelicula{Titulo = "Moana", FechaLanzamiento = new DateTime(2016,11,23) },
+                new Pelicula{Titulo = "Inception", FechaLanzamiento = new DateTime(2010,7,16) },
+            };
+    }
 
     void ManejarClickBoton()
     {
