@@ -3,82 +3,9 @@
 <div>
     <h3>Película</h3>
 
-    <h4>Ejemplo foreach</h4>
-
-    @if (Peliculas is null)
-    {
-        <img alt="cargando" src="https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif"/>
-    }
-    else if(Peliculas.Count == 0)
-    {
-        <p>No hay películas</p>
-    }
-    else
-    {
-        @foreach (var pelicula in Peliculas)
-        {
-            <div>
-                <p>
-                    Título: <b>@pelicula.Titulo</b>
-
-                    @if (DateTime.Today.Subtract(pelicula.FechaLanzamiento).Days <= 14)
-                    {
-                        <span style="color: red"> (Nuevo!)</span>
-                    }
-
-                </p>
-                <p>Fecha Lanzamiento: <b>@pelicula.FechaLanzamiento.ToString("dd MMM yyyy")</b></p>
-            </div>
-        }
-    }
-
-    <br />
-    @*<h4>Ejemplo for</h4>
-
-    @for (int i = 0; i < Peliculas.Count; i++)
-    {
-        <div>
-            <p>@(i+1) Título: <b>@Peliculas[i].Titulo</b></p>
-            <p>Fecha Lanzamiento: <b>@Peliculas[i].FechaLanzamiento.ToString("dd MMM yyyy")</b></p>
-        </div>
-    }*@
-
+    <ListadoPeliculas />
 </div>
 
 @code {
-    string nombre = "Daniela";
 
-    Pelicula WakandaForever { get { return ObtenerPelicula(); } }
-    List<Pelicula>? Peliculas { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        await Task.Delay(3000);
-        Peliculas = ObtenerPeliculas();
-        //Peliculas = new List<Pelicula>();
-    }
-
-    Pelicula ObtenerPelicula()
-    {
-        return new Pelicula
-        {
-            Titulo = "Wakanda Forever",
-            FechaLanzamiento = new DateTime(2022, 11, 11)
-        };
-    }
-
-    List<Pelicula> ObtenerPeliculas()
-    {
-        return new List<Pelicula>()
-            {
-                new Pelicula{Titulo = "Wakanda Forever", FechaLanzamiento = new DateTime(2023,07,20)},
-                new Pelicula{Titulo = "Moana", FechaLanzamiento = new DateTime(2016,11,23) },
-                new Pelicula{Titulo = "Inception", FechaLanzamiento = new DateTime(2010,7,16) },
-            };
-    }
-
-    void ManejarClickBoton()
-    {
-        Console.WriteLine("Me han clickedo desde una función!");
-    }
 }
