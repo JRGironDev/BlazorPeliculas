@@ -1,10 +1,12 @@
 ﻿@page "/"
 
-<div>
+@*<div>
     <h3>Película</h3>
 
     <ListadoPeliculas Peliculas="ObtenerPeliculas()" />
-</div>
+</div>*@
+
+<BindEvento />
 
 @code {
     List<Pelicula> ObtenerPeliculas()
@@ -15,5 +17,7 @@
                 new Pelicula{Titulo = "Moana", FechaLanzamiento = new DateTime(2016,11,23) },
                 new Pelicula{Titulo = "Inception", FechaLanzamiento = new DateTime(2010,7,16) },
             };
+
+        
     }
 }
