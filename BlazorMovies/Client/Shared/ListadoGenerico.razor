@@ -1,0 +1,49 @@
+﻿@typeparam Titem
+
+@if (Listado is null)
+{
+    @if (Cargando is null)
+    {
+        <img alt="cargando" src="https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif" />
+
+    }
+    else
+    {
+        @Cargando
+    }
+
+}
+else if (Listado.Count == 0)
+{
+    @if (NoHayRegistros is null)
+    {
+        <p>No hay registros</p>
+    }
+    else
+    {
+        @NoHayRegistros
+    }
+
+}
+else
+            {
+    @foreach (var elemento in Listado)
+    {
+        @HayRegistros(elemento)
+    }
+            }
+
+@code {
+    [Parameter]
+    public RenderFragment Cargando { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment NoHayRegistros { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment<Titem> HayRegistros { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public List<Titem> Listado { get; set; } = null!;
+}
