@@ -1,19 +1,36 @@
 ﻿@if (Peliculas is null)
 {
-    <img alt="cargando" src="https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif" />
+    @if (Cargando is null)
+    {
+        <img alt="cargando" src="https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif" />
+
+    }
+    else
+    {
+        @Cargando
+    }
+
 }
 else if (Peliculas.Count == 0)
 {
-    <p>No hay películas</p>
+    @if (NoHayRegistros is null)
+    {
+        <p>No hay registros</p>
+    }
+    else
+    {
+        @NoHayRegistros
+    }
+
 }
 else
 {
-    <input type="checkbox"@bind="MostrarBotones"/>
+    <input type="checkbox" @bind="MostrarBotones" />
     <span>Mostrar botónes</span>
 
     @foreach (var pelicula in Peliculas)
     {
-        <PeliculaIndividual Pelicula="pelicula" EliminarPelicula="EliminarPelicula" MostrarBotones="MostrarBotones"/>
+        <PeliculaIndividual Pelicula="pelicula" EliminarPelicula="EliminarPelicula" MostrarBotones="MostrarBotones" />
     }
 }
 
@@ -21,6 +38,12 @@ else
     [Parameter]
     [EditorRequired]
     public List<Pelicula>? Peliculas { get; set; }
+
+    [Parameter]
+    public RenderFragment Cargando { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment NoHayRegistros { get; set; } = null!;
 
     bool MostrarBotones = false;
 
