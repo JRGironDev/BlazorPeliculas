@@ -1,4 +1,5 @@
-﻿
+﻿@inject IJSRuntime js
+
 <input type="checkbox" @bind="MostrarBotones" />
 <span>Mostrar botónes</span>
 
@@ -15,12 +16,12 @@
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"OnInitialized - Cantidad Peliculas {Peliculas.Count}");
+        Console.WriteLine($"OnInitialized - Cantidad Peliculas {Peliculas!.Count}");
     }
 
     protected override void OnParametersSet()
     {
-        Console.WriteLine($"OnParametersSet - Cantidad Peliculas {Peliculas.Count}");
+        Console.WriteLine($"OnParametersSet - Cantidad Peliculas {Peliculas!.Count}");
     }
 
     protected override void OnAfterRender(bool primeraRenderizacion)
@@ -31,14 +32,20 @@
     protected override bool ShouldRender()
     {
         Console.WriteLine("ShouldRender");
-        return false;
+        return true;
     }
 
-    bool MostrarBotones = false;
+    bool MostrarBotones = true;
 
-    private void EliminarPelicula(Pelicula pelicula)
+    private async Task EliminarPelicula(Pelicula pelicula)
     {
-        Console.WriteLine("Eliminando Pelicula");
-        Peliculas.Remove(pelicula);
+        var confirmado = await js.Confirm($"¿Está seguro de eliminar la película {pelicula.Titulo}?");
+
+        if(confirmado)
+        {
+            Console.WriteLine("Eliminando Pelicula");
+            Peliculas!.Remove(pelicula);
+        }
+
     }
 }
