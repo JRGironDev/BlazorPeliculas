@@ -1,14 +1,7 @@
 ﻿@page "/"
-@inject ServicioSingleton singleton
 @inject IRepositorio repositorio
 
 <PageTitle>Blazor Películas</PageTitle>
-
-<HeadContent>
-    <meta name="description" content="Página para visualizar Películas" />
-</HeadContent>
-
-<p>Valor del singleton: @singleton.Valor</p>
 
 <div>
     <h3>Película</h3>
@@ -16,21 +9,12 @@
     <ListadoPeliculas Peliculas="Peliculas" />
 </div>
 
-<button @onclick="AgregarPelicula">Agregar película</button>
-
 @code {
 
-    public List<Pelicula> Peliculas { get; set; }
+    public List<Pelicula>? Peliculas { get; set; }
 
     protected override void OnInitialized()
     {
         Peliculas = repositorio.ObtenerPeliculas();
-    }
-
-
-
-    private void AgregarPelicula()
-    {
-        Peliculas.Add(new Pelicula { Titulo = "Nuevo", FechaLanzamiento = DateTime.Today });
     }
 }
