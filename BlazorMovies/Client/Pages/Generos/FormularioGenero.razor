@@ -1,4 +1,8 @@
-﻿<EditForm Model="Genero" OnValidSubmit="OnValidSubmit">
+﻿@inject SweetAlertService swal
+
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation"></NavigationLock>
+
+<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <div class="mb-3">
         <label>Nombre:</label>
@@ -12,6 +16,14 @@
 </EditForm>
 
 @code {
+
+private EditContext editContext = null!;
+
+    protected override void OnInitialized()
+    {
+        editContext = new(Genero);
+    }
+
     [EditorRequired]
     [Parameter]
     public Genero Genero { get; set; } = null!;
@@ -20,4 +32,40 @@
     [Parameter]
     public EventCallback OnValidSubmit { get; set; }
 
+    public bool FormularioPosteadoConExito { get; set; } = false;
+
+    private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+    {
+        var formularioFueEditado = editContext.IsModified();
+
+        if (!formularioFueEditado)
+        {
+            return;
+        }
+
+        if (FormularioPosteadoConExito)
+        {
+            return;
+        }
+
+        var resultado = await swal.FireAsync(new SweetAlertOptions {
+            Title = "Confirmación",
+            Text = "Los cambios no se han guardado, ¿estás seguro de querer salir?",
+            Icon = SweetAlertIcon.Warning,
+            ShowCancelButton = true,
+            ConfirmButtonText = "Sí, salir",
+            CancelButtonText = "No, quedarme"
+        });
+
+        var confirmado = !string.IsNullOrEmpty(resultado.Value?.ToString());
+
+
+        if (confirmado)
+        {
+            return;
+        }
+
+        context.PreventNavigation();
+
+    }
 }
