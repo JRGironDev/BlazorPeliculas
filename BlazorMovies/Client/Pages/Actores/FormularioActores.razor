@@ -18,7 +18,7 @@
     </div>
 
     <div class="mb-3">
-
+        <InputImg Label="Foto" ImagenSeleccionada="ImagenSeleccionada" ImagenURL="@imagenURL" />
 
     </div>
 
@@ -33,6 +33,25 @@
 </EditForm>
 
 @code {
+
+    string imagenURL;
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrEmpty(Actor.Foto))
+        {
+            imagenURL = Actor.Foto;
+            Actor.Foto = null;
+        }
+
+    }
+
+    private void ImagenSeleccionada(string imagenBase64)
+    {
+        Actor.Foto = imagenBase64;
+        imagenURL = null;
+    }
+
     [Parameter]
     [EditorRequired]
     public Actor Actor { get; set; } = null!;
