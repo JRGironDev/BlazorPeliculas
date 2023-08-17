@@ -19,7 +19,7 @@ a, .btn-link {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 .content {
@@ -99,3 +99,19 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+    
+.form-markdown {
+    display:flex;
+}
+
+.form-markdown text-area {
+    width: 500px;
+    height: 500px;
+    margin-right: 15px
+}
+
+.form-markdown .markdown-container {
+    width: 500px;
+    height: 500px;
+    border: 1px dashed black;
+}
