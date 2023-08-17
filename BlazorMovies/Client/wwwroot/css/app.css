@@ -104,10 +104,10 @@ a, .btn-link {
     display:flex;
 }
 
-.form-markdown text-area {
+.form-markdown textarea {
     width: 500px;
     height: 500px;
-    margin-right: 15px
+    margin-right: 15px;
 }
 
 .form-markdown .markdown-container {
