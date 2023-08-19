@@ -2,16 +2,38 @@
 
 <h3>Editar Película</h3>
 
-<FormularioPeliculas Pelicula="Pelicula" OnValidSubmit="Editar"></FormularioPeliculas>
+<FormularioPeliculas GenerosNoSeleccionados="GenerosNoSeleccionados" GenerosSeleccionados="GenerosSeleccionados" Pelicula="Pelicula" OnValidSubmit="Editar"></FormularioPeliculas>
 
 @code {
-        [Parameter] public int PeliculaId { get; set; }
+    [Parameter] public int PeliculaId { get; set; }
 
-        Pelicula Pelicula = new Pelicula();
+    Pelicula Pelicula = new Pelicula();
+
+    private List<Genero> GenerosNoSeleccionados = new List<Genero>();
+
+    private List<Genero> GenerosSeleccionados = new List<Genero>();
 
     protected override void OnInitialized()
     {
         Pelicula = new Pelicula { Id = Pelicula.Id, Titulo = "Mi Película" };
+
+        GenerosNoSeleccionados = new List<Genero>()
+    {
+                new Genero(){Id = 6, Nombre = "Suspenso"},
+                new Genero(){Id = 7, Nombre = "Romance"},
+                new Genero(){Id = 8, Nombre = "Terror"},
+                new Genero(){Id = 9, Nombre = "Musical"},
+                new Genero(){Id = 10, Nombre = "Documental"},
+        };
+
+        GenerosSeleccionados = new List<Genero>()
+    {
+                new Genero(){Id = 1, Nombre = "Comedia"},
+                new Genero(){Id = 2, Nombre = "Acción"},
+                new Genero(){Id = 3, Nombre = "Drama"},
+                new Genero(){Id = 4, Nombre = "Fantasía"},
+                new Genero(){Id = 5, Nombre = "Ciencia Ficción"},
+        };
     }
 
     private void Editar()

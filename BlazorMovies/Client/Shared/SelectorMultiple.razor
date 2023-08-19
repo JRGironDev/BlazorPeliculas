@@ -2,7 +2,7 @@
     <ul class="selectable-ul">
         @foreach (var item in NoSeleccionados)
         {
-            <li class="selectable-li" @onclick="() => Seleccionar(item)">
+            <li @onclick="() => Seleccionar(item)">
                 @item.Valor
             </li>
         }
@@ -14,7 +14,9 @@
     <ul class="selectable-ul">
         @foreach (var item in Seleccionados)
         {
-            <li @onclick="@(() => Deseleccionar(item))">@item.Valor</li>
+            <li @onclick="@(() => Deseleccionar(item))">
+                @item.Valor
+            </li>
         }
     </ul>
 </div>

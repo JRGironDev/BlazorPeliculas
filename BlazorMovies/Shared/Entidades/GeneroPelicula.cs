@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlazorMovies.Shared.Entidades
 {
-    internal class GeneroPelicula
+    public class GeneroPelicula
     {
+        public int PeliculaId { get; set; }
+        public int GeneroId { get; set; }
     }
 }
