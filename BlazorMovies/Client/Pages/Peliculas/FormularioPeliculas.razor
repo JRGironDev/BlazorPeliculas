@@ -42,7 +42,23 @@
     </div>
 
 
-        <button class="btn btn-success">Guardar Cambios</button>
+    <div class="mb-3">
+        <label>Actores:</label>
+        <div>
+            <SelectorMultipleTypeHead Context="Actor" SearchMethod="BuscarActores" ElementosSeleccionados="ActoresSeleccionados">
+                <MyListTamplete>
+                    @Actor.Nombre
+                </MyListTamplete>
+                <MyResultTamplete>
+                    <img style="width:50px" src="@Actor.Foto" /> 
+                    @Actor.Nombre
+                </MyResultTamplete>
+                
+            </SelectorMultipleTypeHead>
+        </div>
+    </div>
+
+    <button class="btn btn-success">Guardar Cambios</button>
 
 </EditForm>
 
@@ -65,6 +81,9 @@
     [EditorRequired]
     public List<Genero> GenerosNoSeleccionados { get; set; } = new List<Genero>();
 
+    [Parameter]
+    public List<Actor> ActoresSeleccionados { get; set; } = new List<Actor>();
+
     private List<SelectorMultipleModel> Seleccionados { get; set; } = new List<SelectorMultipleModel>();
 
     private List<SelectorMultipleModel> NoSeleccionados { get; set; } = new List<SelectorMultipleModel>();
@@ -86,6 +105,15 @@
     {
         Pelicula.Poster = imagenBase64;
         imagenURL = null;
+    }
+
+    private async Task<IEnumerable<Actor>> BuscarActores(string searchText)
+    {
+        return new List<Actor>()
+        {
+            new Actor() {Id = 1, Nombre= "Tom Holland", Foto = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.latercera.com%2Fresizer%2FLv1ZJ2RxxMB41puL6s-MzNCUPmc%3D%2F900x600%2Fsmart%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcopesa%2FNN5RYASU7VFZFK5ECHJA2QKEYQ.jpg&tbnid=9I95UuZYawkBjM&vet=12ahUKEwil4fjC-OiAAxX0SjABHdW5A2oQMygJegUIARCIAQ..i&imgrefurl=https%3A%2F%2Fwww.latercera.com%2Fmouse%2Ftom-holland-una-parte-de-mi-quiere-alejarse-de-spider-man%2F&docid=t7PLmagW60c-eM&w=900&h=600&q=tom%20holland&ved=2ahUKEwil4fjC-OiAAxX0SjABHdW5A2oQMygJegUIARCIAQ"},
+            new Actor() {Id = 2, Nombre = "Tom Hanks", Foto = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Fa9%2FTom_Hanks_TIFF_2019.jpg&tbnid=-74i5MslWC9LUM&vet=12ahUKEwim3PGZ-OiAAxWwSDABHcm0ABQQMygCegQIARA3..i&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTom_Hanks&docid=JaCp6FOSsttsAM&w=1035&h=1440&q=tom%20hanks&ved=2ahUKEwim3PGZ-OiAAxWwSDABHcm0ABQQMygCegQIARA3"}  
+        };
     }
 
 }
