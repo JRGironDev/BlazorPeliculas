@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BlazorMovies.Shared.Entidades
 {
-    public class GeneroPelicula
+    internal class VotoPelicula
     {
+        public int Id { get; set; }
+        public int Voto { get; set; }
+        public DateTime FechaVoto { get; set; }
         public int PeliculaId { get; set; }
-        public int GeneroId { get; set; }
-
-        public Genero? Genero { get; set; }
-
         public Pelicula? Pelicula { get; set; }
+        
     }
 }
